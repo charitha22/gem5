@@ -96,3 +96,14 @@ class TreePLRURP(BaseReplacementPolicy):
     cxx_class = 'TreePLRURP'
     cxx_header = "mem/cache/replacement_policies/tree_plru_rp.hh"
     num_leaves = Param.Int(Parent.assoc, "Number of leaves in each tree")
+
+class DIPRP(LRURP):
+    type = "DIPRP"
+    cxx_class = "DIPRP"
+    cxx_header = "mem/cache/replacement_policies/dip_rp.hh"
+    btp = Param.Percent(3, "Percentage of blocks to be inserted as MRU")
+    assoc = Param.Int(Parent.assoc, "Associativity")
+    size = Param.Int(Parent.size, "Size of cache")
+    cache_line_size = Param.Int(Parent.cache_line_size, "cache line size")
+    psel_bits = Param.Int(10, "No of bits for the policy select counter")
+    sample_size = Param.Int(32, "No of sets used for sampling each policy")

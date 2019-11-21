@@ -32,13 +32,17 @@
 #define __MEM_CACHE_REPLACEMENT_POLICIES_REPLACEABLE_ENTRY_HH__
 
 #include <cstdint>
+#include <iostream>
 #include <memory>
 
 /**
  * The replacement data needed by replacement policies. Each replacement policy
  * should have its own implementation of replacement data.
  */
-struct ReplacementData {};
+struct ReplacementData {
+  uint32_t set;
+  void initialize(uint32_t s) { set = s;} // hack to get the set value
+};
 
 /**
  * A replaceable entry is a basic entry in a 2d table-like structure that needs
