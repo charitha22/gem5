@@ -19,21 +19,21 @@ DIPRP::DIPRP(const Params *p)
     // std::cout << p->cache_line_size << std::endl;
     // std::cout << no_sets << std::endl;
 
-    assert(no_sets > 0);
-    int np1 = 0, np2 = 0;
-    for (uint i = 0; i < no_sets; i++)
-    {
-        if (is_policy1_set(i))
-        {
-            // std::cout << i << " : p1 set" << std::endl;
-            np1++;
-        }
-        else if (is_policy2_set(i))
-        {
-            // std::cout << i << " : p2 set" << std::endl;
-            np2++;
-        }
-    }
+    // assert(no_sets > 0);
+    // int np1 = 0, np2 = 0;
+    // for (uint i = 0; i < no_sets; i++)
+    // {
+    //     if (is_policy1_set(i))
+    //     {
+    //         // std::cout << i << " : p1 set" << std::endl;
+    //         np1++;
+    //     }
+    //     else if (is_policy2_set(i))
+    //     {
+    //         // std::cout << i << " : p2 set" << std::endl;
+    //         np2++;
+    //     }
+    // }
 
     // std::cout << "no of p1 sets = " << np1 << std::endl;
     // std::cout << "no of p2 sets = " << np2 << std::endl;

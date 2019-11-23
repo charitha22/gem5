@@ -107,3 +107,19 @@ class DIPRP(LRURP):
     cache_line_size = Param.Int(Parent.cache_line_size, "cache line size")
     psel_bits = Param.Int(10, "No of bits for the policy select counter")
     sample_size = Param.Int(32, "No of sets used for sampling each policy")
+
+
+class DRRIPRP(BaseReplacementPolicy):
+    type = "DRRIPRP"
+    cxx_class = "DRRIPRP"
+    cxx_header = "mem/cache/replacement_policies/drrip_rp.hh"
+    num_bits = Param.Int(2, "Number of bits per RRPV")
+    hit_priority = Param.Bool(False,
+        "Prioritize evicting blocks that havent had a hit recently")
+    btp = Param.Percent(3,
+        "Percentage of blocks to be inserted with long RRPV")
+    assoc = Param.Int(Parent.assoc, "Associativity")
+    size = Param.Int(Parent.size, "Size of cache")
+    cache_line_size = Param.Int(Parent.cache_line_size, "cache line size")
+    psel_bits = Param.Int(10, "No of bits for the policy select counter")
+    sample_size = Param.Int(32, "No of sets used for sampling each policy")

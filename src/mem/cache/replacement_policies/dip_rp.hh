@@ -19,7 +19,7 @@ class DIPRP : public LRURP
     const unsigned no_sets;
     // policy selector
     mutable SatCounter<uint16_t> psel;
-
+    // no of bits assigned for members under one consitituent
     const unsigned no_offset_bits;
 
     /** DIP-specific implementation of replacement data. */
