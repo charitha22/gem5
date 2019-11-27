@@ -49,6 +49,20 @@ from m5.objects import *
 from .Caches import *
 from common import ObjectList
 
+def set_cache_replacement_policy(options, cache):
+    if(not options.cache_repl_policy):
+        print("Using default LRURP cache replacement")
+        cache.replacement_policy = LRURP()
+    elif(options.cache_repl_policy == "DIPRP"):
+        cache.replacement_policy = DIPRP()
+    elif(options.cache_repl_policy == "BIPRP"):
+        cache.replacement_policy = BIPRP()
+    elif(options.cache_repl_policy == "LIPRP"):
+        cache.replacement_policy = LIPRP()
+    else:
+        print("Invalid cache replacement policy")
+        sys.exit(-1)
+
 def config_cache(options, system):
     if options.external_memory_system and (options.caches or options.l2cache):
         print("External caches and internal caches are exclusive options.\n")
@@ -101,6 +115,7 @@ def config_cache(options, system):
         system.l2 = l2_cache_class(clk_domain=system.cpu_clk_domain,
                                    size=options.l2_size,
                                    assoc=options.l2_assoc)
+        set_cache_replacement_policy(options, system.l2)
 
         system.tol2bus = L2XBar(clk_domain = system.cpu_clk_domain)
         system.l2.cpu_side = system.tol2bus.master
@@ -123,6 +138,9 @@ def config_cache(options, system):
                                   assoc=options.l1i_assoc)
             dcache = dcache_class(size=options.l1d_size,
                                   assoc=options.l1d_assoc)
+
+            set_cache_replacement_policy(options, icache)
+            set_cache_replacement_policy(options, dcache)
 
             # If we have a walker cache specified, instantiate two
             # instances here

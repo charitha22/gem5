@@ -67,6 +67,77 @@ from common import MemConfig
 from common.FileSystemConfig import config_filesystem
 from common.Caches import *
 from common.cpu2000 import *
+import spec2k6
+
+def get_spec_benchmark(options):
+    # add spec 2000 benchmarks
+    if options.benchmark == 'perlbench':
+        process = spec2k6.perlbench
+    elif options.benchmark == 'bzip2':
+        process = spec2k6.bzip2
+    elif options.benchmark == 'gcc':
+        process = spec2k6.gcc
+    elif options.benchmark == 'bwaves':
+        process = spec2k6.bwaves
+    elif options.benchmark == 'gamess':
+        process = spec2k6.gamess
+    elif options.benchmark == 'mcf':
+        process = spec2k6.mcf
+    elif options.benchmark == 'milc':
+        process = spec2k6.milc
+    elif options.benchmark == 'zeusmp':
+        process = spec2k6.zeusmp
+    elif options.benchmark == 'gromacs':
+        process = spec2k6.gromacs
+    elif options.benchmark == 'cactusADM':
+        process = spec2k6.cactusADM
+    elif options.benchmark == 'leslie3d':
+        process = spec2k6.leslie3d
+    elif options.benchmark == 'namd':
+        process = spec2k6.namd
+    elif options.benchmark == 'gobmk':
+        process = spec2k6.gobmk;
+    elif options.benchmark == 'dealII':
+        process = spec2k6.dealII
+    elif options.benchmark == 'soplex':
+        process = spec2k6.soplex
+    elif options.benchmark == 'povray':
+        process = spec2k6.povray
+    elif options.benchmark == 'calculix':
+        process = spec2k6.calculix
+    elif options.benchmark == 'hmmer':
+        process = spec2k6.hmmer
+    elif options.benchmark == 'sjeng':
+        process = spec2k6.sjeng
+    elif options.benchmark == 'GemsFDTD':
+        process = spec2k6.GemsFDTD
+    elif options.benchmark == 'libquantum':
+        process = spec2k6.libquantum
+    elif options.benchmark == 'h264ref':
+        process = spec2k6.h264ref
+    elif options.benchmark == 'tonto':
+        process = spec2k6.tonto
+    elif options.benchmark == 'lbm':
+        process = spec2k6.lbm
+    elif options.benchmark == 'omnetpp':
+        process = spec2k6.omnetpp
+    elif options.benchmark == 'astar':
+        process = spec2k6.astar
+    elif options.benchmark == 'wrf':
+        process = spec2k6.wrf
+    elif options.benchmark == 'sphinx3':
+        process = spec2k6.sphinx3
+    elif options.benchmark == 'xalancbmk':
+        process = spec2k6.xalancbmk
+    elif options.benchmark == 'specrand_i':
+        process = spec2k6.specrand_i
+    elif options.benchmark == 'specrand_f':
+        process = spec2k6.specrand_f
+
+    process.cwd = os.getcwd()
+    multiprocesses = []
+    multiprocesses.append(process)
+    return multiprocesses, 1
 
 def get_processes(options):
     """Interprets provided options and returns a list of processes"""
@@ -122,6 +193,10 @@ def get_processes(options):
 parser = optparse.OptionParser()
 Options.addCommonOptions(parser)
 Options.addSEOptions(parser)
+parser.add_option("--cache_repl_policy", type="string", action="store",
+            help="Cache replacement policy")
+parser.add_option("-b", "--benchmark", default="",
+            help="The benchmark to be loaded.")
 
 if '--ruby' in sys.argv:
     Ruby.define_options(parser)
@@ -160,6 +235,8 @@ if options.bench:
             sys.exit(1)
 elif options.cmd:
     multiprocesses, numThreads = get_processes(options)
+elif options.benchmark:
+    multiprocesses, numThreads = get_spec_benchmark(options)
 else:
     print("No workload specified. Exiting!\n", file=sys.stderr)
     sys.exit(1)

@@ -58,6 +58,8 @@ class L1Cache(Cache):
     mshrs = 4
     tgts_per_mshr = 20
 
+
+
 class L1_ICache(L1Cache):
     is_read_only = True
     # Writeback clean lines as well

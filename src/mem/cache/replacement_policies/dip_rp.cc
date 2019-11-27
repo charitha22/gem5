@@ -7,13 +7,15 @@
 
 #include "base/random.hh"
 #include "params/DIPRP.hh"
+#include "debug/CacheReplPolicy.hh"
 
 DIPRP::DIPRP(const Params *p)
     : LRURP(p), btp(p->btp),
     no_sets((p->size) / (p->assoc * p->cache_line_size)),
-    psel(p->psel_bits),
+    psel(p->psel_bits,  1 << (p->psel_bits-1)),
     no_offset_bits((uint)std::log2(no_sets / p->sample_size))
 {
+    // DPRINTF(CacheReplPolicy, "psel init value : %d \n", 1 << (p->psel_bits-1));
     // std::cout << p->assoc << std::endl;
     // std::cout << p->size << std::endl;
     // std::cout << p->cache_line_size << std::endl;
@@ -59,6 +61,13 @@ DIPRP::reset(const std::shared_ptr<ReplacementData> &replacement_data) const
         if (psel.getMSB() == 0) reset_policy1(casted_replacement_data);
         else  reset_policy2(casted_replacement_data);
     }
+
+    Tick t = curTick();
+    if(t%1000000000 == 0){
+        DPRINTF(CacheReplPolicy, "value of psel counter at tick %d : %d\n",
+                curTick(), psel.getCounter());
+    }
+    
 }
 
 void

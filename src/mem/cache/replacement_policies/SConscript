@@ -43,3 +43,6 @@ Source('second_chance_rp.cc')
 Source('tree_plru_rp.cc')
 Source('dip_rp.cc')
 Source('drrip_rp.cc')
+
+DebugFlag('CacheReplPolicy')
+
