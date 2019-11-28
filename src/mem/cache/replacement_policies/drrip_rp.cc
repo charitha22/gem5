@@ -7,6 +7,7 @@
 #include "base/logging.hh" // For fatal_if
 #include "base/random.hh"
 #include "params/DRRIPRP.hh"
+#include "debug/CacheReplPolicy.hh"
 
 DRRIPRP::DRRIPRP(const Params *p)
     : BaseReplacementPolicy(p),
