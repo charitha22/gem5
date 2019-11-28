@@ -59,6 +59,12 @@ def set_cache_replacement_policy(options, cache):
         cache.replacement_policy = BIPRP()
     elif(options.cache_repl_policy == "LIPRP"):
         cache.replacement_policy = LIPRP()
+    elif(options.cache_repl_policy == "DRRIPRP"):
+        cache.replacement_policy = DRRIPRP()
+    elif(options.cache_repl_policy == "RRIPRP"):
+        cache.replacement_policy = RRIPRP()
+    elif(options.cache_repl_policy == "BRRIPRP"):
+        cache.replacement_policy = BRRIPRP()
     else:
         print("Invalid cache replacement policy")
         sys.exit(-1)
