@@ -2,7 +2,7 @@
 --debug-flags=CacheReplPolicy \
 -d diprp_out \
 configs/example/se.py \
---benchmark=mcf \
+--benchmark=bzip2 \
 --cpu-type=DerivO3CPU \
 --caches --l2cache \
 --l2_size='512kB' \
@@ -10,9 +10,9 @@ configs/example/se.py \
 --l1d_size='16kB' \
 --l1i_size='16kB' \
 --cache_repl_policy='DIPRP' \
--F 1000000 \
--s 1000000 \
--W 1000000 \
--I 1000000
+-F 1000000000 \
+-s 100000000 \
+-W 100000000 \
+-I 250000000
 
 echo "Done" | mailx -s "Job Finished" cgusthin@purdue.edu

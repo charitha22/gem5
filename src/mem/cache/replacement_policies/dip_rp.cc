@@ -88,7 +88,7 @@ DIPRP::reset_policy1(const std::shared_ptr<DIPReplData>& replacement_data) const
 {
     // std::cout << "psel = " << psel.getCounter() << std::endl;
     // std::cout << "using p1" << std::endl;
-    replacement_data->lastTouchTick = 1;
+    replacement_data->lastTouchTick = curTick();
 }
 
 void
