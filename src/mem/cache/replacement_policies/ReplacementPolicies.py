@@ -79,7 +79,7 @@ class BRRIPRP(BaseReplacementPolicy):
     cxx_class = 'BRRIPRP'
     cxx_header = "mem/cache/replacement_policies/brrip_rp.hh"
     num_bits = Param.Int(2, "Number of bits per RRPV")
-    hit_priority = Param.Bool(False,
+    hit_priority = Param.Bool(True,
         "Prioritize evicting blocks that havent had a hit recently")
     btp = Param.Percent(3,
         "Percentage of blocks to be inserted with long RRPV")
@@ -114,7 +114,7 @@ class DRRIPRP(BaseReplacementPolicy):
     cxx_class = "DRRIPRP"
     cxx_header = "mem/cache/replacement_policies/drrip_rp.hh"
     num_bits = Param.Int(2, "Number of bits per RRPV")
-    hit_priority = Param.Bool(False,
+    hit_priority = Param.Bool(True,
         "Prioritize evicting blocks that havent had a hit recently")
     btp = Param.Percent(3,
         "Percentage of blocks to be inserted with long RRPV")
