@@ -145,8 +145,8 @@ def config_cache(options, system):
             dcache = dcache_class(size=options.l1d_size,
                                   assoc=options.l1d_assoc)
 
-            set_cache_replacement_policy(options, icache)
-            set_cache_replacement_policy(options, dcache)
+            # set_cache_replacement_policy(options, icache)
+            # set_cache_replacement_policy(options, dcache)
 
             # If we have a walker cache specified, instantiate two
             # instances here

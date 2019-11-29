@@ -15,7 +15,7 @@ DIPRP::DIPRP(const Params *p)
     psel(p->psel_bits,  1 << (p->psel_bits-1)),
     no_offset_bits((uint)std::log2(no_sets / p->sample_size))
 {
-    // DPRINTF(CacheReplPolicy, "psel init value : %d \n", 1 << (p->psel_bits-1));
+    DPRINTF(CacheReplPolicy, "psel init value : %d \n", 1 << (p->psel_bits-1));
     // std::cout << p->assoc << std::endl;
     // std::cout << p->size << std::endl;
     // std::cout << p->cache_line_size << std::endl;
@@ -27,12 +27,12 @@ DIPRP::DIPRP(const Params *p)
     // {
     //     if (is_policy1_set(i))
     //     {
-    //         // std::cout << i << " : p1 set" << std::endl;
+    //         std::cout << i << " : p1 set" << std::endl;
     //         np1++;
     //     }
     //     else if (is_policy2_set(i))
     //     {
-    //         // std::cout << i << " : p2 set" << std::endl;
+    //         std::cout << i << " : p2 set" << std::endl;
     //         np2++;
     //     }
     // }
@@ -49,17 +49,30 @@ DIPRP::reset(const std::shared_ptr<ReplacementData> &replacement_data) const
     uint32_t set = casted_replacement_data->set;
 
 
+
     if (is_policy1_set(set)){
         psel++;
+        // DPRINTF(CacheReplPolicy, "RESET p1 set %d ," 
+        //     "psel value %d\n", set, psel.getCounter());
         reset_policy1(casted_replacement_data);
     }
     else if (is_policy2_set(set)){
         psel--;
+        // DPRINTF(CacheReplPolicy, "RESET p2 set %d ,"
+        //     "psel value %d\n", set, psel.getCounter());
         reset_policy2(casted_replacement_data);
     }
     else{
-        if (psel.getMSB() == 0) reset_policy1(casted_replacement_data);
-        else  reset_policy2(casted_replacement_data);
+        if (psel.getMSB() == 0){
+            // DPRINTF(CacheReplPolicy, "RESET follower set using p1 , set %d,"
+            //     "psel value %d\n", set, psel.getCounter());
+            reset_policy1(casted_replacement_data);
+        } 
+        else{
+            // DPRINTF(CacheReplPolicy, "RESET follower set using p2 , set %d,"
+            //     "psel value %d\n", set, psel.getCounter());
+            reset_policy2(casted_replacement_data);
+        }  
     }
 
     Tick t = curTick();

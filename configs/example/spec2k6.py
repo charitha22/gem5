@@ -185,7 +185,7 @@ calculix.output = 'beampic.log'
 
 #456.hmmer
 hmmer=Process()
-hmmr_dir = '456.hmmr/'
+hmmr_dir = '456.hmmer/'
 hmmer.executable = bench_dir+hmmr_dir+'/exe/hmmer'
 data=bench_dir+hmmr_dir+'/data/ref/input/nph3.hmm'
 hmmer.cmd = [hmmer.executable]+['--fixed', '0', '--mean', '325', '--num', '5000', '--sd', '200', '--seed', '0', data]
@@ -255,7 +255,7 @@ wrf.output = 'rsl.out.0000'
 
 #482.sphinx
 sphinx3=Process()
-sphinx3_dir = '482.sphinx/'
+sphinx3_dir = '482.sphinx3/'
 sphinx3.executable =  bench_dir+sphinx3_dir+'/exe/sphinx'
 sphinx3.cmd = [sphinx3.executable]+['ctlfile', '.', 'args.an4']
 sphinx3.output = 'an4.out'
