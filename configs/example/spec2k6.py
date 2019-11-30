@@ -216,7 +216,7 @@ libquantum.output = 'ref.out'
 #464.h264ref
 h264ref=Process()
 h264_dir = '464.h264ref/'
-h264ref.executable = bench_dir+h264_dir+'/exe/h264'
+h264ref.executable = bench_dir+h264_dir+'/exe/h264ref'
 data=bench_dir+h264_dir+'/data/ref/input/foreman_ref_encoder_baseline.cfg'
 h264ref.cmd = [h264ref.executable]+['-d',data]
 h264ref.output = 'foreman_ref_encoder_baseline.out'
