@@ -16,6 +16,7 @@ DRRIPRP::DRRIPRP(const Params *p)
     psel(p->psel_bits,  1 << (p->psel_bits-1)),
     no_offset_bits((uint)std::log2(no_sets / p->sample_size))
 {
+    DPRINTF(CacheReplPolicy, "psel init value : %d \n", 1 << (p->psel_bits-1));
     fatal_if(numRRPVBits <= 0, "There should be at least one bit per RRPV.\n");
 }
 
