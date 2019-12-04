@@ -2,15 +2,15 @@
 --debug-flags=CacheReplPolicy \
 -d diprp_out \
 configs/example/se.py \
---benchmark=bzip2 \
+--benchmark=mcf \
 --cpu-type=DerivO3CPU \
 --caches --l2cache \
---l2_size='512kB' \
+--l2_size='256kB' \
 --l2_assoc=8 \
 --l1d_size='16kB' \
 --l1i_size='16kB' \
 --cache_repl_policy='DIPRP' \
--F 1000000000 \
+-F 14750000000 \
 -s 100000000 \
 -W 100000000 \
 -I 250000000
