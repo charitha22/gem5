@@ -13,7 +13,8 @@ DIPRP::DIPRP(const Params *p)
     : LRURP(p), btp(p->btp),
     no_sets((p->size) / (p->assoc * p->cache_line_size)),
     psel(p->psel_bits,  1 << (p->psel_bits-1)),
-    no_offset_bits((uint)std::log2(no_sets / p->sample_size))
+    no_offset_bits((uint)std::log2(no_sets / p->sample_size)),
+    psel_log_tick(0)
 {
     DPRINTF(CacheReplPolicy, "psel init value : %d \n", 1 << (p->psel_bits-1));
     // std::cout << p->assoc << std::endl;
@@ -76,9 +77,10 @@ DIPRP::reset(const std::shared_ptr<ReplacementData> &replacement_data) const
     }
 
     Tick t = curTick();
-    if(t%1000000000 == 0){
+    if(t - psel_log_tick > 1000000000){
         DPRINTF(CacheReplPolicy, "value of psel counter at tick %d : %d\n",
                 curTick(), psel.getCounter());
+        psel_log_tick = t;
     }
     
 }

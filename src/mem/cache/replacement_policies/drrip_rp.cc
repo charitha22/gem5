@@ -14,7 +14,8 @@ DRRIPRP::DRRIPRP(const Params *p)
       numRRPVBits(p->num_bits), hitPriority(p->hit_priority), btp(p->btp),
     no_sets((p->size) / (p->assoc * p->cache_line_size)),
     psel(p->psel_bits,  1 << (p->psel_bits-1)),
-    no_offset_bits((uint)std::log2(no_sets / p->sample_size))
+    no_offset_bits((uint)std::log2(no_sets / p->sample_size)),
+    psel_log_tick(0)
 {
     DPRINTF(CacheReplPolicy, "psel init value : %d \n", 1 << (p->psel_bits-1));
     fatal_if(numRRPVBits <= 0, "There should be at least one bit per RRPV.\n");
@@ -69,9 +70,10 @@ DRRIPRP::reset(const std::shared_ptr<ReplacementData>& replacement_data) const
     }
     
     Tick t = curTick();
-    if(t%1000000000 == 0){
+    if(t - psel_log_tick > 1000000000){
         DPRINTF(CacheReplPolicy, "value of psel counter at tick %d : %d\n",
                 curTick(), psel.getCounter());
+        psel_log_tick = t;
     }
 
 }

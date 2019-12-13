@@ -21,6 +21,8 @@ class DIPRP : public LRURP
     mutable SatCounter<uint16_t> psel;
     // no of bits assigned for members under one consitituent
     const unsigned no_offset_bits;
+    
+    mutable int64_t psel_log_tick;
 
     /** DIP-specific implementation of replacement data. */
     struct DIPReplData : ReplacementData

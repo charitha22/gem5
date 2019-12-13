@@ -5,7 +5,7 @@ configs/example/se.py \
 --benchmark=mcf \
 --cpu-type=DerivO3CPU \
 --caches --l2cache \
---l2_size='256kB' \
+--l2_size='512kB' \
 --l2_assoc=8 \
 --l1d_size='16kB' \
 --l1i_size='16kB' \

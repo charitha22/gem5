@@ -63,6 +63,8 @@ class DRRIPRP : public BaseReplacementPolicy
     // no of bits assigned for members under one consitituent
     const unsigned no_offset_bits;
 
+    mutable int64_t psel_log_tick;
+
   public:
     /** Convenience typedef. */
     typedef DRRIPRPParams Params;
